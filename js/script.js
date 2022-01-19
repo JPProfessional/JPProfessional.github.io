@@ -1,6 +1,12 @@
 
 //Initalize variables with associated propoerties for DOM Construction
 
+
+var resumeJSON = document.createElement('iframe');
+resumeJSON.src = 'https://registry.jsonresume.org/JPProfessional';
+var iframeContainer = document.createElement('div');
+iframeContainer.className = "iframeContainer";
+iframeContainer.appendChild(resumeJSON);
 var experienceSection = document.createElement('div');
 
 var educationSection = document.createElement('div');
@@ -19,7 +25,7 @@ var licenseSection = document.createElement('div');
 licenseSection.appendChild(logoAPEGA);
 
 var main = document.querySelector('main');
-main.appendChild(licenseSection);
+main.appendChild(iframeContainer);
 
 // container.className = 'container';
 // var DIKUWLogo = document.createElement('img');
