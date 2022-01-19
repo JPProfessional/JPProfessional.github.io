@@ -7,11 +7,6 @@ resumeJSON.src = 'https://registry.jsonresume.org/JPProfessional';
 var iframeContainer = document.createElement('div');
 iframeContainer.className = "iframeContainer";
 iframeContainer.appendChild(resumeJSON);
-var experienceSection = document.createElement('div');
-
-var educationSection = document.createElement('div');
-
-
 
 var logoAPEGA = document.createElement('img');
 logoAPEGA.src = 'img/logoAPEGA.png';
