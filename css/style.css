@@ -18,13 +18,3 @@ body {
     color: var(--accent-dark)
 }
 
-.iframeContainer{
-    width: 95%;
-    height: 100vh;
-}
-
-iframe {
-    width: 95%;
-    height: 100vh;
-}
-
