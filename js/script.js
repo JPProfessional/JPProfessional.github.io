@@ -125,6 +125,10 @@ const resumeData = {
     // ],
 }
 
+var logoImages = [
+  {"name": "UniversityofAlberta", "file": "img/logoUniversityOfAlbertaEngineeringTranparent.png", "url": "https://www.ualberta.ca/engineering/mechanical-engineering/index.html"},{"name": "AcadiaUniversity", "file": "img/logoAcadiaUniversityEngineeringTranparent.png", "url": "https://engineering.acadiau.ca/Welcome.html"},{"name": "AtomicEnergyCanadaLimited", "file": "img/logoAECL-Stacked-BlueTranparent.png", "url": "www.aecl.ca"},{"name": "Schlumberger", "file": "img/logoSchlumbergerTranparent.png", "url": "www.slb.com"},{"name": "ConocoPhillips", "file": "img/logoConocoPhillipsTranparent.png", "url": "www.conocophillips.com"},{"name": "Tendeka", "file": "img/logoTendekaTransparent.png", "url": "www.tendeka.com"},{"name": "Calmena", "file": "img/logoCalmenaTransparent.png", "url": ""},{"name": "EnerplusCorporation", "file": "img/logoEnerplusTranparent.png", "url": "www.enerplus.com"},{"name": "NXTEnergySolutions", "file": "img/logoNXTEnergySolutionsTransparent.png", "url": "www.nxtenergy.com"},{"name": "WeatherfordnowStratumReservoir", "file": "img/logoWeatherfordLaboratoriesTranparent.png", "url": "www.stratumreservoir.com"},{"name": "DIKUWIncorporated", "file": "img//home/john/repos/JPProfessional.github.io/img/DIKUW_Logo_B_RGB_1400Tranpsarent.png", "url": "www.dikuw.ca"},{"name": "EmersonAutomationSolutions", "file": "img/logoEmersonTransparent.png", "url": "www.emerson.com/en-ca/automation/control-and-safety-systems/scada-systems/zedi-cloud-scada-solutions"}
+]
+
 
 //Parse resume object with stringify to overcome common error LMGTFY 
 const work = JSON.stringify(resumeData.work);
@@ -132,6 +136,7 @@ const workParsed = JSON.parse(work);
 //Add numeric date field to our objects
 workParsed.forEach(job => job.startDateNumber = Date.parse(job.startDate));
 workParsed.forEach(job => job.endDateNumber = Date.parse(job.endDate));
+delete workParsed.website
 
 // Create an object of unique companies worked and populate with summary data
 const workSummaryList = [...new Set(workParsed.map( item => item.name))];
@@ -148,8 +153,7 @@ workSummaryList.forEach( (company, index) => {
     var record = {
       "name": company,
       "startDate": workParsed.find(({ name }) => name.match(RegExp(regex))).startDate,
-      "endDate": workParsed.find(({ name }) => name.match(RegExp(regex))).endDate,
-      "website": workParsed.find(({ name }) => name.match(RegExp(regex))).website
+      "endDate": workParsed.find(({ name }) => name.match(RegExp(regex))).endDate
     }
   // Create company Meta Data and summarize start and end if more than 1 entry
   } else {
@@ -162,9 +166,7 @@ workSummaryList.forEach( (company, index) => {
     var record = {
       "name": company,
       "startDate":nameStartDate,
-      "endDate":nameEndDate,
-      "website": nameSet[0].website
-      // "website": nameSet.find(({ record }) => record.name == company ).website
+      "endDate":nameEndDate
     }
   }
   if (index == 0) {
@@ -184,33 +186,56 @@ Object.assign( expTitle, {
 var expContainer = document.createElement('div');
 expContainer.className = "expContainer"
 expContainer.appendChild(expTitle);
+
+
 workSummary.forEach( (summary, index) => {
-  const rowVarName = summary.name.split(" ").join("") + 'SummaryRow';
-  eval('var ' + rowVarName + " = document.createElement('div')");
-  Object.assign( eval(rowVarName), {
+  
+  const companyNameCollapsed = summary.name.split(" ").join("");
+  
+  //Create company container with logo
+  eval('var ' + companyNameCollapsed + "Container = document.createElement('div')");
+  Object.assign( eval(companyNameCollapsed + "Container"), {
+    className: 'expCompanyContainer'
+  });
+  eval('var ' + companyNameCollapsed + "LogoContainer = document.createElement('div')");
+  Object.assign( eval(companyNameCollapsed + "LogoContainer"), {
+    className: 'expCompanyLogoContainer'
+  });
+  eval('var ' + companyNameCollapsed + "Logo = document.createElement('img')");
+  Object.assign( eval(companyNameCollapsed + "Logo"), {
+    className: 'companyLogoImage',
+    alt: summary.name,
+    href: logoImages.find(({ name }) => name.match(RegExp(companyNameCollapsed))).url,
+    src: logoImages.find(({ name }) => name.match(RegExp(companyNameCollapsed))).file
+  });
+
+  eval(companyNameCollapsed + "LogoContainer").appendChild(eval(companyNameCollapsed + "Logo"));
+  eval(companyNameCollapsed + "Container").appendChild(eval(companyNameCollapsed + "LogoContainer"));
+  expContainer.appendChild(eval(companyNameCollapsed + "Container"));
+
+  
+  //Create company summary row
+  eval('var ' + companyNameCollapsed + "SummaryRow = document.createElement('div')");
+  Object.assign( eval(companyNameCollapsed + "SummaryRow"), {
         className: 'expSummaryRow',
         // textContent: summary.name
-      });Object.assign( rowVarName, {
-        className: 'expSummaryRow'
   });
   
+  //Create entries for company summary row
   Object.entries(summary).forEach(detail => {
-    console.log({detail});
     const detailType = 'expDetail' + (detail[0].charAt(0).toUpperCase() + detail[0].slice(1));
-    console.log({detailType});
-    // detailType = detailType.split(" ").join("");
-    // console.log({detailType})
     eval('var ' + detailType + " = document.createElement('p')");
-    // Object.assign(detailType, eval(detail));
     Object.assign( eval(detailType), {
       className: detailType,
       textContent: detail[1]
     });
     eval(detailType).classList.add('expDetail');
-    eval(rowVarName).appendChild(eval(detailType));
+    eval(companyNameCollapsed + "SummaryRow").appendChild(eval(detailType));
   })
-  expContainer.appendChild(eval(rowVarName));
+  eval(companyNameCollapsed + "Container").appendChild(eval(companyNameCollapsed + "SummaryRow"));
 });
+
+
 var main = document.querySelector('main');
 main.appendChild(expContainer);
 

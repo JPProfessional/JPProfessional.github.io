@@ -41,10 +41,24 @@ h6 {
 .sectionTitle {
     font-family: D-DIN REGULAR, ;
 }
+.expCompanyContainer {
+    display: flex;
+    flex-flow: row;
+}
+.expCompanyLogoContainer {
+    min-width: 75px;
+    min-height: 225px;
+    width: 25%;
+}
+.companyLogoImage {
+    max-width: 150px;
+    max-height: 50px;
+}
 .expSummaryRow {
     display: flex;
     flex-flow: row;
     padding: 5px;
+    width: 75%;
 }
 .expDetail {
     padding: 5px;
