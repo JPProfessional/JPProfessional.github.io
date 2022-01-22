@@ -1,3 +1,10 @@
+/* PRIMARY UPPERCASE DISPLAY HEADLINE, TITLES + NUMBERS = TITILLIUM WEB REGULAR, SEMIBOLD & BOLD = 
+PRIMARY INFORMATIONAL + PARAGRAPH = Roboto Light & Regular
+ALTERNATE INFORMATIONAL = Titillium Web
+MIXED-CASE HEADINGS + TITLES = D-Din Bold
+ALTERNATE UPPERCASE HEADINGS, TITLES + LABELS= D-DIN REGULAR & BOLD
+LOWERCASE WEB URL = d-din expanded bold */
+
 :root {
     --brand-blue: #51a3d6;
     --brand-gray: #5b5b5b;
@@ -14,7 +21,31 @@ body {
     background-color: var(--background-blue);
 }
 
+h5 {
+    font-family: TITILLIUM WEB SEMIBOLD, Sans;
+    text-transform: uppercase;
+}
+h6 {
+    font-family: D-DIN REGULAR, Sans;
+}
+
 .link {
     color: var(--accent-dark)
 }
 
+
+.sectionTitle {
+    font-family: TITILLIUM WEB REGULAR , D-DIN REGULAR, ;
+}
+
+.sectionTitle {
+    font-family: D-DIN REGULAR, ;
+}
+.expSummaryRow {
+    display: flex;
+    flex-flow: row;
+    padding: 5px;
+}
+.expDetail {
+    padding: 5px;
+}

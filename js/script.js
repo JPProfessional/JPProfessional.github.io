@@ -95,10 +95,10 @@ const resumeData = {
         {"name": "ConocoPhillips", "website": "www.conocophillips.com", "position": "Petrophysicist", "Summary": "Recruited by former clients in the Technical Excellence department to perform regional petrophysical studies as part of a multidisciplinary team.", "location": "Canada, Calgary", "startDate": "2007-05-01", "endDate": "2008-04-20", "highlights": []},
         {"name": "Tendeka", "website": "www.tendeka.com", "position": "Vice President North and South America for Sensornet", "Summary": "Recruited as Vice President North and South America for Sensornet Limited then promoted to Strategic Relationships Manager and Regional Manager Canada after Tendeka consolidation within Kenda Capital aka Shell Technology Ventures Fund group of companies.", "location": "Canada, Calgary", "startDate": "2008-05-01", "endDate": "2009-09-01", "highlights": []},
         {"name": "Tendeka", "website": "www.tendeka.com", "position": "Regional Manager Canada and Strategic Relationship Manager", "Summary": "", "location": "Canada, Calgary", "startDate": "2009-09-01", "endDate": "2010-12-13", "highlights": []},
-        {"name": "Calmena (now defunct)", "website": "", "position": "Business Development Manager", "Summary": "Joined a hungry oil field services start up and grew our share of the Microseismic Fracture Monitoring and Horizontal Completion Technology market in Canada.", "location": "Canada, Calgary", "startDate": "2010-12-13", "endDate": "2012-12-18", "highlights": []},
+        {"name": "Calmena", "website": "", "position": "Business Development Manager", "Summary": "Joined a hungry oil field services start up and grew our share of the Microseismic Fracture Monitoring and Horizontal Completion Technology market in Canada.", "location": "Canada, Calgary", "startDate": "2010-12-13", "endDate": "2012-12-18", "highlights": []},
         {"name": "Enerplus Corporation", "website": "www.enerplus.com", "position": "Staff Petrophysical Engineer", "Summary": "Recruited by the Chief Geoscientist to expand the rigorous use of Petrophysics across Enerplus. Established a foundation of Petrophysical knowledge throughout the organization by performing advanced analysis and delivering formal and informal training to geoscientists, engineers and managers.", "location": "Canada, Calgary", "startDate": "2012-12-18", "endDate": "2015-06-02", "highlights": []},
         {"name": "NXT Energy Solutions", "website": "www.nxtenergy.com", "position": "Business Devlopment Manager", "Summary": "", "location": "Canada, Calgary", "startDate": "2016-12-01", "endDate": "2017-02-22", "highlights": []},
-        {"name": "Weatherford (now Stratum Reservoir)", "website": "www.stratumreservoir.com", "position": "Product Line Manager - Reservoir Services (Laboratories and Sub-Surface Consulting)", "Summary": "Recruited to lead a technically strong but unprofitable Geoscience, Fluid PVT (Pressure Volume Temperature) and SCAL (Special Core Analysis) laboratory. Implemented a cultural change and renewed focus on oilfield service fundamentals.", "location": "Canada, Calgary", "startDate": "2017-04-01", "endDate": "2018-06-21", "highlights": []},
+        {"name": "Weatherford now Stratum Reservoir", "website": "www.stratumreservoir.com", "position": "Product Line Manager - Reservoir Services (Laboratories and Sub-Surface Consulting)", "Summary": "Recruited to lead a technically strong but unprofitable Geoscience, Fluid PVT (Pressure Volume Temperature) and SCAL (Special Core Analysis) laboratory. Implemented a cultural change and renewed focus on oilfield service fundamentals.", "location": "Canada, Calgary", "startDate": "2017-04-01", "endDate": "2018-06-21", "highlights": []},
         {"name": "DIKUW Incorporated", "website": "www.dikuw.ca", "position": "Founder", "Summary": "DIKUW specializes in enabling YOUR TEAM to overcome barriers to success. DIKUW collaborates with a focus on fundamental principles to assess, suggest and implement the optimal solution — all to provide exceptional advice that will transform your business and provide value for years to come.", "location": "Canada, Calgary", "startDate": "2019-03-01", "endDate": "2022-01-19", "highlights": [ ]},
         {"name": "DIKUW Incorporated", "website": "www.ceda.com", "position": "Consulting Engagement to CEDA, Technical Center of Excellence", "Summary": "Coached CEDA’s newly founded “Technical Center of Exellence” using DIKUW’s proprietary  “Comprehensive Framework for Field Operations Project Management” and general knowledge of how to deploy technical resources for successful commercial outcomes.’", "location": "Canada, Calgary", "startDate": "2019-03-01", "endDate": "2019-09-15", "highlights": [ ]},
         {"name": "Emerson Automation Solutions", "website": "www.zedisolutions.com", "position": "Team Lead, Customer Solutions Engineering, Zedi Cloud SCADA (IoT SaaS Platform)", "Summary": "", "location": "Canada, Calgary", "startDate": "2019-05-01", "endDate": "2019-08-01", "highlights": [ ]},
@@ -141,13 +141,15 @@ var startDateSort
 workSummaryList.forEach( (company, index) => {
   const regex = RegExp(company);
   const nameSet = workParsed.filter(({name}) => name.match(regex));
+  // console.log({nameSet});
   //Create company Meta Data if company has 1 entry
-  if ( !nameSet[1] ) {
+  if ( !nameSet[1]) {
+    // console.log({regex});
     var record = {
-      "name": workParsed.filter(({name}) => name.match(regex)).name,
-      "startDate": workParsed.filter(({name}) => name.match(regex)).StartDate,
-      "endDate": workParsed.filter(({name}) => name.match(regex)).endDate,
-      "website":workParsed.filter(({name}) => name.match(regex)).website
+      "name": company,
+      "startDate": workParsed.find(({ name }) => name.match(RegExp(regex))).startDate,
+      "endDate": workParsed.find(({ name }) => name.match(RegExp(regex))).endDate,
+      "website": workParsed.find(({ name }) => name.match(RegExp(regex))).website
     }
   // Create company Meta Data and summarize start and end if more than 1 entry
   } else {
@@ -161,155 +163,54 @@ workSummaryList.forEach( (company, index) => {
       "name": company,
       "startDate":nameStartDate,
       "endDate":nameEndDate,
-      "website":nameSet[0].website
+      "website": nameSet[0].website
+      // "website": nameSet.find(({ record }) => record.name == company ).website
     }
   }
-  
-  console.log({record});
   if (index == 0) {
-    // workSummary[index] = Object.create(record);
     workSummary[index] = record;
   } else {
     workSummary[index] = record;
   };
   
-
-  // regex = new RegExp(company)
-  // const subSet = workParsed.filter(({name}) => name.match(regex));
-  //  // 5. Sort the inventors by years lived
-  // // const 
-  // startDateSort = subSet.sort(function(a, b) {
-  //   const lastStart = a.startDateNumber;
-  //   const nextStart = b.startDateNumber;
-  //   return lastStart > nextStart ? -1 : 1;
-  // });
-  // console.log({startDateSort});
-
-
-  // var startDateNumberArray = [];
-  // subSet.forEach( item => startDateNumberArray.push(item.startDateNumber));
-  // var companyStartDate = 
-  // console.log(startDateNumberArray);
-  // const company startDateNumber
-  // const endDateArray = [...new Set(workParsed.map( function (item) {
-  //   if (item.name == company) {
-  //     return item.endDateNumber;
-  //   }
-  // }))];
-  // console.log(...subSet.startDateNumber);
-  // workSummary.push(["name": company]) ,
-  // workSummary[workIndex] = [company, Math.min(...startDateArray), Math.max(...endDateArray)],
-  // [workIndex]["name"] = company;
-  // workSummary[workIndex]["startDateNumber"] = Math.min(startDateArray);
-  // workSummary[workIndex]["endDateNumber"] = Math.max(endDateArray);
-  // console.log({workSummary});
-
 });
-console.Table({workSummary});
-
-// workParsed.forEach(function (job,index) {
-//   delete job.summary;
-//   delete job.highlights;
-//   delete job.position;
-//   var SubSet = workWorking.filter(company => {
-//     const regex = new RegExp(job.name);
-//     console.log({regex});
-//     // return workWorking.name.match(regex)
-//   })
-//   // for ( i = index; i < index ; i++ ) {
-//   //     var const endDateMin = 
-//   // };
-//   // console.log(Math.min(work.filter(job.name)));
-// });
-
-//Create an array of work history entries
-// var work = [];
-// work = resumeData.work;
-// var workKeys = Object.keys(work);
-// workKeys.forEach(key => {
-//   if (key != 'name') {
-//     console.log({key});
-//     delete work[key]
-//   } 
-// });
-
-// workKeys.forEach(key => {
-//   console.log({key});
-//   if (work.hasOwnProperty(key)) {
-//     if (work[key] === null) {
-//       delete work[key];
-//     }
-//   }
-// }
-
-//Create Set of Unique company names
-// var companies = [];
-// work.forEach(element => companies['name'].push(element.name));
-
-// var companiesSummary = [...new Map(companies.map(item => [item['name'], item])).values();
-
-// work.forEach( function (record) {
-//   console.log({record});
-//   if (!uniqueCompanies.name.(/A/)) {
-//     uniqueCompanies.name.push(record);
-//     console.log(uniqueCompanies);
-//   };
-//   return uniqueCompanies.add(record.name) ;
-//   } );
-
-// companies = Object.fromEntries(work.name);
-// console.log({uniqueCompanies});
-
-//Parse work history entries as dates
-// work.forEach(record => {
-//   record.startDateNumber = Date.parse(record.startDate);
-//   record.endDateNumber = Date.parse(record.endDate)
-//   }
-// );
 
 
-// summarizeWorkByName(work);
-
-// function summarizeWorkByName(work) {
-//   for (i = 0; i < uniqueCompanies.length-1; i++) {
-//     // const fifteenShort = inventors.filter(inventor => (inventor.year >= 1500 & inventor.year <= 1599));
-//     var companySubset = work.filter(workRecord => workRecord.name === companies[i].name);
-//     console.log({companySubset})
-   
-//     var start = [];
-//     start = Object.entries(companySubset.startDateNumber);
-//     uniqueCompanies[i].Start = Math.min(...start);
-//     uniqueCompanies[i].StartYear = uniqueCompanies[i].Start.getFullYear;
-//     uniqueCompanies[i].StartMonth = uniqueCompanies[i].Start.getMonth;
-//     // console.log(companyStartMonth);
-//     var end = companySubset.endDateNumber;
-//     uniqueCompanies[i].End = Math.max(...end);
-//     uniqueCompanies[i].EndYear = uniqueCompanies[i].getFullYear;
-//     uniqueCompanies[i].EndMonth = uniqueCompanies[i].End.getMonth;
-//     // var companyDuration = (companyEnd - companyStart)
-//   }
-// }
-
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
-
-function workSummaryWrite( array ) {
-  if (array.length == 1) {
-
-  };
-  if (index == 0) {
-    // workSummary[index] = Object.create(record);
-    workSummary[index] = record;
-  } else {
-    workSummary[index] = record;
-  };
-}
-
-function objectSort(array, property) {
-  array.sort(function(a, b) {
-    const lastStart = a.property;
-    const nextStart = b.property;
-    return lastStart > nextStart ? -1 : 1;
+var expTitle = document.createElement('h5');
+Object.assign( expTitle, {
+  className: "sectionTitle",
+  textContent: "Experience"
+} );
+var expContainer = document.createElement('div');
+expContainer.className = "expContainer"
+expContainer.appendChild(expTitle);
+workSummary.forEach( (summary, index) => {
+  const rowVarName = summary.name.split(" ").join("") + 'SummaryRow';
+  eval('var ' + rowVarName + " = document.createElement('div')");
+  Object.assign( eval(rowVarName), {
+        className: 'expSummaryRow',
+        // textContent: summary.name
+      });Object.assign( rowVarName, {
+        className: 'expSummaryRow'
   });
-}
+  
+  Object.entries(summary).forEach(detail => {
+    console.log({detail});
+    const detailType = 'expDetail' + (detail[0].charAt(0).toUpperCase() + detail[0].slice(1));
+    console.log({detailType});
+    // detailType = detailType.split(" ").join("");
+    // console.log({detailType})
+    eval('var ' + detailType + " = document.createElement('p')");
+    // Object.assign(detailType, eval(detail));
+    Object.assign( eval(detailType), {
+      className: detailType,
+      textContent: detail[1]
+    });
+    eval(detailType).classList.add('expDetail');
+    eval(rowVarName).appendChild(eval(detailType));
+  })
+  expContainer.appendChild(eval(rowVarName));
+});
+var main = document.querySelector('main');
+main.appendChild(expContainer);
+
