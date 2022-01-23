@@ -126,7 +126,7 @@ const resumeData = {
 }
 
 var logoImages = [
-  {"name": "UniversityofAlberta", "file": "img/logoUniversityOfAlbertaEngineeringTranparent.png", "url": "https://www.ualberta.ca/engineering/mechanical-engineering/index.html"},{"name": "AcadiaUniversity", "file": "img/logoAcadiaUniversityEngineeringTranparent.png", "url": "https://engineering.acadiau.ca/Welcome.html"},{"name": "AtomicEnergyCanadaLimited", "file": "img/logoAECL-Stacked-BlueTranparent.png", "url": "www.aecl.ca"},{"name": "Schlumberger", "file": "img/logoSchlumbergerTranparent.png", "url": "www.slb.com"},{"name": "ConocoPhillips", "file": "img/logoConocoPhillipsTranparent.png", "url": "www.conocophillips.com"},{"name": "Tendeka", "file": "img/logoTendekaTransparent.png", "url": "www.tendeka.com"},{"name": "Calmena", "file": "img/logoCalmenaTransparent.png", "url": ""},{"name": "EnerplusCorporation", "file": "img/logoEnerplusTranparent.png", "url": "www.enerplus.com"},{"name": "NXTEnergySolutions", "file": "img/logoNXTEnergySolutionsTransparent.png", "url": "www.nxtenergy.com"},{"name": "WeatherfordnowStratumReservoir", "file": "img/logoWeatherfordLaboratoriesTranparent.png", "url": "www.stratumreservoir.com"},{"name": "DIKUWIncorporated", "file": "img//home/john/repos/JPProfessional.github.io/img/DIKUW_Logo_B_RGB_1400Tranpsarent.png", "url": "www.dikuw.ca"},{"name": "EmersonAutomationSolutions", "file": "img/logoEmersonTransparent.png", "url": "www.emerson.com/en-ca/automation/control-and-safety-systems/scada-systems/zedi-cloud-scada-solutions"}
+  {"name": "UniversityofAlberta", "file": "img/logoUniversityOfAlbertaEngineeringTranparent.png", "url": "https://www.ualberta.ca/engineering/mechanical-engineering/index.html"},{"name": "AcadiaUniversity", "file": "img/logoAcadiaUniversityEngineeringTranparent.png", "url": "https://engineering.acadiau.ca/Welcome.html"},{"name": "AtomicEnergyCanadaLimited", "file": "img/logoAECL-Stacked-BlueTranparent.png", "url": "https://www.aecl.ca"},{"name": "Schlumberger", "file": "img/logoSchlumbergerTranparent.png", "url": "https://www.slb.com"},{"name": "ConocoPhillips", "file": "img/logoConocoPhillipsTranparent.png", "url": "https://www.conocophillips.com"},{"name": "Tendeka", "file": "img/logoTendekaTransparent.png", "url": "https://www.tendeka.com"},{"name": "Calmena", "file": "img/logoCalmenaTransparent.png", "url": ""},{"name": "EnerplusCorporation", "file": "img/logoEnerplusTranparent.png", "url": "https://www.enerplus.com"},{"name": "NXTEnergySolutions", "file": "img/logoNXTEnergySolutionsTransparent.png", "url": "http://www.nxtenergy.com/"},{"name": "WeatherfordnowStratumReservoir", "file": "img/logoWeatherfordTransparent.png", "url": "https://www.stratumreservoir.com"},{"name": "DIKUWIncorporated", "file": "img/logoDIKUWTransparent.png", "url": "https://www.dikuw.ca"},{"name": "EmersonAutomationSolutions", "file": "img/logoEmersonTransparent.png", "url": "https://www.emerson.com/en-ca/automation/control-and-safety-systems/scada-systems/zedi-cloud-scada-solutions"}
 ]
 
 
@@ -201,15 +201,21 @@ workSummary.forEach( (summary, index) => {
   Object.assign( eval(companyNameCollapsed + "LogoContainer"), {
     className: 'expCompanyLogoContainer'
   });
+  eval('var ' + companyNameCollapsed + "LogoHref = document.createElement('a')");
+  Object.assign( eval(companyNameCollapsed + "LogoHref"), {
+    className: 'expCompanyHref',
+    href: logoImages.find(({ name }) => name.match(RegExp(companyNameCollapsed))).url
+  });
+
   eval('var ' + companyNameCollapsed + "Logo = document.createElement('img')");
   Object.assign( eval(companyNameCollapsed + "Logo"), {
     className: 'companyLogoImage',
     alt: summary.name,
-    href: logoImages.find(({ name }) => name.match(RegExp(companyNameCollapsed))).url,
+    // "a href": logoImages.find(({ name }) => name.match(RegExp(companyNameCollapsed))).file,
     src: logoImages.find(({ name }) => name.match(RegExp(companyNameCollapsed))).file
   });
-
-  eval(companyNameCollapsed + "LogoContainer").appendChild(eval(companyNameCollapsed + "Logo"));
+  eval(companyNameCollapsed + "LogoHref").appendChild(eval(eval(companyNameCollapsed + "Logo")));
+  eval(companyNameCollapsed + "LogoContainer").appendChild(eval(eval(companyNameCollapsed + "LogoHref")));
   eval(companyNameCollapsed + "Container").appendChild(eval(companyNameCollapsed + "LogoContainer"));
   expContainer.appendChild(eval(companyNameCollapsed + "Container"));
 
