@@ -1,6 +1,24 @@
 //Create Footer Text
 var footer = document.querySelector('footer');
 var footerP = document.createElement('p');
+
+const today = new Date();
+// const monthNames = ["Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug","Sep", "Oct", "Nov", "Dec"];
+const day = today.getDate();
+const monthIndex = today.getMonth();
+// const monthName = monthNames[monthIndex];
+const monthCounter = monthIndex + 1;
+const year = today.getFullYear();
+const present = `${year}-${monthCounter}-${day}`;
+
+// const today = new Date();
+// var dd = String(today.getDate()).padStart(2, '0');
+// var mmm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+// var yyyy = today.getFullYear();
+
+
+
+
 footerP.textContent = 'Copyright © ' + new Date().getFullYear() + ' John Perrin P.Eng.';
 footer.appendChild(footerP);
 
@@ -99,8 +117,9 @@ const resumeData = {
         {"name": "Enerplus Corporation", "website": "www.enerplus.com", "position": "Staff Petrophysical Engineer", "Summary": "Recruited by the Chief Geoscientist to expand the rigorous use of Petrophysics across Enerplus. Established a foundation of Petrophysical knowledge throughout the organization by performing advanced analysis and delivering formal and informal training to geoscientists, engineers and managers.", "location": "Canada, Calgary", "startDate": "2012-12-18", "endDate": "2015-06-02", "highlights": []},
         {"name": "NXT Energy Solutions", "website": "www.nxtenergy.com", "position": "Business Devlopment Manager", "Summary": "", "location": "Canada, Calgary", "startDate": "2016-12-01", "endDate": "2017-02-22", "highlights": []},
         {"name": "Weatherford", "website": "www.stratumreservoir.com", "position": "Product Line Manager - Reservoir Services (Laboratories and Sub-Surface Consulting)", "Summary": "Recruited to lead a technically strong but unprofitable Geoscience, Fluid PVT (Pressure Volume Temperature) and SCAL (Special Core Analysis) laboratory. Implemented a cultural change and renewed focus on oilfield service fundamentals.", "location": "Canada, Calgary", "startDate": "2017-04-01", "endDate": "2018-06-21", "highlights": []},
-        {"name": "DIKUW Incorporated", "website": "www.dikuw.ca", "position": "Founder", "Summary": "DIKUW specializes in enabling YOUR TEAM to overcome barriers to success. DIKUW collaborates with a focus on fundamental principles to assess, suggest and implement the optimal solution — all to provide exceptional advice that will transform your business and provide value for years to come.", "location": "Canada, Calgary", "startDate": "2019-03-01", "endDate": "2022-01-19", "highlights": [ ]},
+        {"name": "DIKUW Incorporated", "website": "www.dikuw.ca", "position": "Founder", "Summary": "DIKUW specializes in enabling YOUR TEAM to overcome barriers to success. DIKUW collaborates with a focus on fundamental principles to assess, suggest and implement the optimal solution — all to provide exceptional advice that will transform your business and provide value for years to come.", "location": "Canada, Calgary", "startDate": "2019-03-01", "endDate": present, "highlights": [ ]},
         {"name": "DIKUW Incorporated", "website": "www.ceda.com", "position": "Consulting Engagement to CEDA International Corp.", "Summary": "Coached CEDA’s newly founded “Technical Center of Exellence” using DIKUW’s proprietary  “Comprehensive Framework for Field Operations Project Management” and general knowledge of how to deploy technical resources for successful commercial outcomes.’", "location": "Canada, Calgary", "startDate": "2019-03-01", "endDate": "2019-09-15", "highlights": [ ]},
+        {"name": "Proudfoot", "website": "www.proudfoot.com", "position": "Engagement Manager", "Summary": "At Proudfoot we work shoulder-to-shoulder, engaging your teams to assess, design, implement, and accelerate improvement and transformation, building capabilities at every level along the way, and delivering measurable bottom line impact.", "location": "Worldwide", "startDate": "2022-04-01", "endDate": present, "highlights": [ ]},
         {"name": "Emerson Automation Solutions", "website": "www.zedisolutions.com", "position": "Team Lead, Customer Solutions Engineering, Zedi Cloud SCADA (IoT SaaS Platform)", "Summary": "", "location": "Canada, Calgary", "startDate": "2019-05-01", "endDate": "2019-08-01", "highlights": [ ]},
         {"name": "Emerson Automation Solutions", "website": "www.zedisolutions.com", "position": "Manager, Automation Engineering, Zedi Cloud SCADA (IoT SaaS Platform)", "Summary": "", "location": "Canada, Calgary", "startDate": "2019-08-01", "endDate": "2020-02-01", "highlights": [ ]},
         {"name": "Emerson Automation Solutions", "website": "www.zedisolutions.com", "position": "Director, Automation Engineering, Zedi Cloud SCADA (IoT SaaS Platform)", "Summary": "Achieved an across the board KPI improvement of Automation Engineering Sales, Implementation and and Support", "location": "Canada, Calgary", "startDate": "2020-02-01", "endDate": "2020-10-01", "highlights": []},
@@ -126,7 +145,7 @@ const resumeData = {
 }
 
 var logoImages = [
-  {"name": "UniversityofAlberta", "file": "img/logoUniversityOfAlbertaEngineeringTranparent.png", "url": "https://www.ualberta.ca/engineering/mechanical-engineering/index.html"},{"name": "AcadiaUniversity", "file": "img/logoAcadiaUniversityEngineeringTranparent.png", "url": "https://engineering.acadiau.ca/Welcome.html"},{"name": "AtomicEnergyCanadaLimited", "file": "img/logoAECL-Stacked-BlueTranparent.png", "url": "https://www.aecl.ca"},{"name": "Schlumberger", "file": "img/logoSchlumbergerTranparent.png", "url": "https://www.slb.com"},{"name": "ConocoPhillips", "file": "img/logoConocoPhillipsTranparent.png", "url": "https://www.conocophillips.com"},{"name": "Tendeka", "file": "img/logoTendekaTransparent.png", "url": "https://www.tendeka.com"},{"name": "Calmena", "file": "img/logoCalmenaTransparent.png", "url": ""},{"name": "EnerplusCorporation", "file": "img/logoEnerplusTranparent.png", "url": "https://www.enerplus.com"},{"name": "NXTEnergySolutions", "file": "img/logoNXTEnergySolutionsTransparent.png", "url": "http://www.nxtenergy.com/"},{"name": "WeatherfordnowStratumReservoir", "file": "img/logoWeatherfordTransparent.png", "url": "https://www.stratumreservoir.com"},{"name": "DIKUWIncorporated", "file": "img/logoDIKUWTransparent.png", "url": "https://www.dikuw.ca"},{"name": "EmersonAutomationSolutions", "file": "img/logoEmersonTransparent.png", "url": "https://www.emerson.com/en-ca/automation/control-and-safety-systems/scada-systems/zedi-cloud-scada-solutions"}
+  {"name": "UniversityofAlberta", "file": "img/logoUniversityOfAlbertaEngineeringTranparent.png", "url": "https://www.ualberta.ca/engineering/mechanical-engineering/index.html"},{"name": "AcadiaUniversity", "file": "img/logoAcadiaUniversityEngineeringTranparent.png", "url": "https://engineering.acadiau.ca/Welcome.html"},{"name": "AtomicEnergyCanadaLimited", "file": "img/logoAECL-Stacked-BlueTranparent.png", "url": "https://www.aecl.ca"},{"name": "Schlumberger", "file": "img/logoSchlumbergerTranparent.png", "url": "https://www.slb.com"},{"name": "ConocoPhillips", "file": "img/logoConocoPhillipsTranparent.png", "url": "https://www.conocophillips.com"},{"name": "Tendeka", "file": "img/logoTendekaTransparent.png", "url": "https://www.tendeka.com"},{"name": "Calmena", "file": "img/logoCalmenaTransparent.png", "url": ""},{"name": "EnerplusCorporation", "file": "img/logoEnerplusTranparent.png", "url": "https://www.enerplus.com"},{"name": "NXTEnergySolutions", "file": "img/logoNXTEnergySolutionsTransparent.png", "url": "http://www.nxtenergy.com/"},{"name": "WeatherfordnowStratumReservoir", "file": "img/logoWeatherfordTransparent.png", "url": "https://www.stratumreservoir.com"},{"name": "DIKUWIncorporated", "file": "img/logoDIKUWTransparent.png", "url": "https://www.dikuw.ca"},{"name": "Proudfoot", "file": "img/logoProudfoot.png", "url": "https://www.proudfoot.com"},{"name": "EmersonAutomationSolutions", "file": "img/logoEmersonTransparent.png", "url": "https://www.emerson.com/en-ca/automation/control-and-safety-systems/scada-systems/zedi-cloud-scada-solutions"}
 ]
 
 
@@ -316,4 +335,18 @@ function calculateDuration(array) {
   if (durationYears == 1) {yearS = ''}
   if (durationMonths == 1) {yearS = ''}
   array.durationPhrase = `${durationYears} year${yearS}, ${durationMonths} month${monthS}`
+}
+
+Date.prototype.toShortFormat = function() {
+
+  let monthNames =["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep", "Oct","Nov","Dec"];
+  
+  let day = this.getDate();
+  
+  let monthIndex = this.getMonth();
+  let monthName = monthNames[monthIndex];
+  let monthCounter = monthIndex + 1;
+  let year = this.getFullYear();
+  
+  return `${year}-${monthCounter}-${day}`;  
 }
